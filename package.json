@@ -16,7 +16,12 @@
     "lint:fix": "biome check src/ --fix",
     "format": "biome format src/",
     "test": "vitest run",
-    "prepare": "husky"
+    "prepare": "husky",
+    "typeorm": "typeorm-ts-node-commonjs",
+    "migration:create": "bash scripts/migration-create.sh",
+    "migration:generate": "npm run typeorm migration:generate -- -d src/database/dataSource.ts",
+    "migration:run": "npm run typeorm migration:run -- -d src/database/dataSource.ts",
+    "migration:revert": "npm run typeorm migration:revert -- -d src/database/dataSource.ts"
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^7.0.0",
@@ -27,15 +32,19 @@
     "express-rate-limit": "^7.2.0",
     "helmet": "^8.0.0",
     "http-status-codes": "^2.3.0",
+    "mysql2": "^3.13.0",
     "pino": "^9.4.0",
     "pino-http": "^10.0.0",
+    "reflect-metadata": "^0.2.2",
     "swagger-ui-express": "^5.0.0",
+    "typeorm": "^0.3.21",
     "zod": "^3.22.4"
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/cors": "^2.8.17",
     "@types/express": "^4.17.21",
+    "@types/node": "^22.13.10",
     "@types/supertest": "^6.0.2",
     "@types/swagger-ui-express": "^4.1.6",
     "husky": "^9.0.11",
@@ -43,6 +52,8 @@
     "pino-pretty": "^13.0.0",
     "rimraf": "^6.0.0",
     "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "tsup": "^8.0.2",
     "tsx": "^4.7.2",
     "typescript": "^5.4.4",

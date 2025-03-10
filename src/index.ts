@@ -1,5 +1,11 @@
 import { env } from "@/common/utils/envConfig";
+import { initializeDatabase } from "@/database";
 import { app, logger } from "@/server";
+
+// Initialize database
+initializeDatabase()
+  .then(() => logger.info("Database connection established"))
+  .catch((err) => logger.error("Database connection failed:", err));
 
 const server = app.listen(env.PORT, () => {
   const { NODE_ENV, HOST, PORT } = env;
